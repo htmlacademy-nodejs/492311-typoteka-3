@@ -2,7 +2,7 @@
   "name": "492311-typoteka-3",
   "version": "1.0.0",
   "description": "Типотека",
-  "main": "./src/service/service.js",
+  "main": "index.js",
   "scripts": {
     "start": "node ./src/service/service.js",
     "test": "npm run eslint",
