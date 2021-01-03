@@ -1,7 +1,8 @@
 'use strict';
 
 const fs = require(`fs`);
-const {getRandomInt, shuffle} = require(`../../utils.js`);
+const chalk = require(`chalk`);
+const {getRandomInt, shuffle, MessageColor} = require(`../../utils.js`);
 const {ExitCode} = require(`../../constants.js`);
 
 const DEFAULT_COUNT = 1;
@@ -92,18 +93,52 @@ const generateDate = (monthAgo) => {
   return date.toISOString().replace(`T`, ` `).slice(0, date.toISOString().indexOf(`.`));
 };
 
+const isMultiplyElementsInArray = (arr) => {
+  if (arr.length > 1) {
+    console.log(chalk[MessageColor.error](`Можно ввести только 1 аргумент`));
+    process.exit(ExitCode.error);
+  }
+};
+
+const isArgumentNumeric = (args) => {
+  if (!args[0].match(/^-?[0-9]\d*(\.\d+)?$/)) {
+    console.log(chalk[MessageColor.error](`Аргумент должен быть числом`));
+    process.exit(ExitCode.error);
+  }
+};
+
+const isNegativeNumber = (args) => {
+  if (args[0] < 0) {
+    console.log(chalk[MessageColor.error](`Аргумент должен быть больше нуля`));
+    process.exit(ExitCode.error);
+  }
+};
+
+const isAmountExceed = (amount) => {
+  if (amount > MAX_COUNT) {
+    console.log(chalk[MessageColor.error](`Не больше ${MAX_COUNT} объявлений`));
+    process.exit(ExitCode.error);
+  }
+};
+
 module.exports = {
   name: `--generate`,
-  run(args) {
+  async run(args) {
+    if (args.length) {
+      isMultiplyElementsInArray(args);
+      isArgumentNumeric(args);
+      isNegativeNumber(args);
+    }
     const [count] = args;
     const countPosts = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    if (countPosts > MAX_COUNT) {
-      console.log(`Не больше ${MAX_COUNT} объявлений`);
-      process.exit(ExitCode.error);
-    }
+    isAmountExceed(count);
     const content = JSON.stringify(generatePosts(countPosts));
-    fs.writeFile(FILE_NAME, content, (err) => {
-      return err ? console.error(`Can't write data to file...`) : console.info(`Operation success. File created.`);
-    });
+    try {
+      await fs.writeFile(FILE_NAME, content);
+      console.info(chalk[MessageColor.success](`Operation success. File created.`));
+    } catch (err) {
+      console.error(chalk[MessageColor.error](`Can't write data to file...`));
+    }
+
   }
 };
