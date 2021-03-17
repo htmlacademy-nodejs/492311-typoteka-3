@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
 const {getRandomInt, shuffle, MessageColor} = require(`../../utils.js`);
 const {ExitCode} = require(`../../constants.js`);
@@ -100,7 +100,7 @@ const isMultiplyElementsInArray = (arr) => {
   }
 };
 
-const isArgumentNumeric = (args) => {
+const isArgumentDigit = (args) => {
   if (!args[0].match(/^-?[0-9]\d*(\.\d+)?$/)) {
     console.log(chalk[MessageColor.error](`Аргумент должен быть числом`));
     process.exit(ExitCode.error);
@@ -126,7 +126,7 @@ module.exports = {
   async run(args) {
     if (args.length) {
       isMultiplyElementsInArray(args);
-      isArgumentNumeric(args);
+      isArgumentDigit(args);
       isNegativeNumber(args);
     }
     const [count] = args;
@@ -139,6 +139,5 @@ module.exports = {
     } catch (err) {
       console.error(chalk[MessageColor.error](`Can't write data to file...`));
     }
-
   }
 };
