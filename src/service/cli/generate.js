@@ -22,7 +22,7 @@ const readContent = async (filePath) => {
     return content.split(`\n`);
   } catch (e) {
     console.error(e);
-    return [];
+    process.exit(ExitCode.error);
   }
 };
 
