@@ -4,6 +4,9 @@ const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
 const {getRandomInt, shuffle, MessageColor} = require(`../../utils.js`);
 const {ExitCode} = require(`../../constants.js`);
+const FILE_SENTENCES_PATH = `./data/sentences.txt`;
+const FILE_TITLES_PATH = `./data/titles.txt`;
+const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 
 const DEFAULT_COUNT = 1;
 const MAX_COUNT = 1001;
@@ -13,57 +16,18 @@ const HOURS_IN_DAY = 24;
 const MINUTES_IN_HOUR = 60;
 const SECONDS_IN_MINUTES = 60;
 
-const TITLES = [
-  `Ёлки. История деревьев`,
-  `Как перестать беспокоиться и начать жить`,
-  `Как достигнуть успеха не вставая с кресла`,
-  `Обзор новейшего смартфона`,
-  `Лучшие рок-музыканты 20-века`,
-  `Как начать программировать`,
-  `Учим HTML и CSS`,
-  `Что такое золотое сечение`,
-  `Как собрать камни бесконечности`,
-  `Борьба с прокрастинацией`,
-  `Рок — это протест`,
-  `Самый лучший музыкальный альбом этого года`,
-];
+const readContent = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return content.split(`\n`);
+  } catch (e) {
+    console.error(e);
+    process.exit(ExitCode.error);
+  }
+};
 
-const SENTENCES = [
-  `Ёлки — это не просто красивое дерево. Это прочная древесина.`,
-  `Первая большая ёлка была установлена только в 1938 году.`,
-  `Вы можете достичь всего. Стоит только немного постараться и запастись книгами.`,
-  `Этот смартфон — настоящая находка. Большой и яркий экран, мощнейший процессор — всё это в небольшом гаджете.`,
-  `Золотое сечение — соотношение двух величин, гармоническая пропорция.`,
-  `Собрать камни бесконечности легко, если вы прирожденный герой.`,
-  `Освоить вёрстку несложно. Возьмите книгу новую книгу и закрепите все упражнения на практике.`,
-  `Бороться с прокрастинацией несложно. Просто действуйте. Маленькими шагами.`,
-  `Программировать не настолько сложно, как об этом говорят.`,
-  `Простые ежедневные упражнения помогут достичь успеха.`,
-  `Это один из лучших рок-музыкантов.`,
-  `Он написал больше 30 хитов.`,
-  `Из под его пера вышло 8 платиновых альбомов.`,
-  `Процессор заслуживает особого внимания. Он обязательно понравится геймерам со стажем.`,
-  `Рок-музыка всегда ассоциировалась с протестами. Так ли это на самом деле?`,
-  `Достичь успеха помогут ежедневные повторения.`,
-  `Помните, небольшое количество ежедневных упражнений лучше, чем один раз, но много.`,
-  `Как начать действовать? Для начала просто соберитесь.`,
-  `Альбом стал настоящим открытием года. Мощные гитарные рифы и скоростные соло-партии не дадут заскучать.`,
-];
-
-const CATEGORIES = [
-  `Деревья`,
-  `За жизнь`,
-  `Без рамки`,
-  `Разное`,
-  `IT`,
-  `Музыка`,
-  `Кино`,
-  `Программирование`,
-  `Железо`,
-];
-
-const getMockCategories = () => {
-  let newArr = [...CATEGORIES];
+const getMockCategories = (categories) => {
+  let newArr = [...categories];
   const ITEMS_TO_REMOVE = getRandomInt(1, newArr.length);
   for (let i = 1; i < ITEMS_TO_REMOVE; i++) {
     newArr.splice(getRandomInt(0, newArr.length), 1);
@@ -71,13 +35,13 @@ const getMockCategories = () => {
   return newArr;
 };
 
-const generatePosts = (count) => (
+const generatePosts = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
+    title: titles[getRandomInt(0, titles.length - 1)],
     createdDate: generateDate(getRandomInt(0, MAX_MONTH_AGO)),
-    announce: shuffle(SENTENCES).slice(0, 5).join(` `),
-    fullText: shuffle(SENTENCES).slice(0, getRandomInt(1, SENTENCES.length - 1)).join(` `),
-    category: getMockCategories()
+    announce: shuffle(sentences).slice(0, 5).join(` `),
+    fullText: shuffle(sentences).slice(0, getRandomInt(1, sentences.length - 1)).join(` `),
+    category: getMockCategories(categories)
   })));
 
 const generateDate = (monthAgo) => {
@@ -132,7 +96,10 @@ module.exports = {
     const [count] = args;
     const countPosts = Number.parseInt(count, 10) || DEFAULT_COUNT;
     isAmountExceed(count);
-    const content = JSON.stringify(generatePosts(countPosts));
+    const titles = await readContent(FILE_TITLES_PATH);
+    const sentences = await readContent(FILE_SENTENCES_PATH);
+    const categories = await readContent(FILE_CATEGORIES_PATH);
+    const content = JSON.stringify(generatePosts(countPosts, titles, categories, sentences));
     try {
       await fs.writeFile(FILE_NAME, content);
       console.info(chalk[MessageColor.success](`Operation success. File created.`));
