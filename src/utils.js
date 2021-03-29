@@ -7,6 +7,14 @@ const MessageColor = {
   help: `grey`
 };
 
+const HttpCode = {
+  OK: 200,
+  NOT_FOUND: 404,
+  INTERNAL_SERVER_ERROR: 500,
+  FORBIDDEN: 403,
+  UNAUTHORIZED: 401,
+};
+
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -22,7 +30,8 @@ module.exports = {
     }
     return arr;
   },
-  MessageColor
+  MessageColor,
+  HttpCode
 };
 
 
