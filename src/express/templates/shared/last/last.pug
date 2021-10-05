@@ -3,5 +3,8 @@ include last-list-item
 mixin last(data)
   section.main-page__last.last
     ul.last__list
-      each item in data
-        +last-list-item(item)
+      if data.length
+        each item in data
+          +last-list-item(item)
+      else
+        p.last__empty Здесь пока ничего нет...

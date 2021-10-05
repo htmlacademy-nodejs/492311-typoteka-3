@@ -19,11 +19,11 @@ mixin header(state)
           li.navigation__item
             a(href='main-no-news.html') main-no-news.html --- Страница без новостей и комментов
           li.navigation__item
-            a(href='admin-my-publications-2.html') admin-my-publications-2.html --- Мои записи
+            a(href='admin-my-my-2.html') admin-my-publications-2.html --- Мои записи
           li.navigation__item
             a(href='admin-categories.html') admin-categories.html --- Категории
           li.navigation__item
-            a(href='admin-my-publications-1.html') admin-my-publications-1.html --- Комментарии
+            a(href='admin-my-my-1.html') admin-my-publications-1.html --- Комментарии
           li.navigation__item
             a(href='new-post-photo.html') new-post-photo.html --- Страница для нового поста
           li.navigation__item
@@ -43,7 +43,7 @@ mixin header(state)
           li.navigation__item
             a(href='sign-in-error-3.html') sign-in-error-3.html--- sign-in-error-3.html--- Регистрация c ошибкой поля пароль
           li.navigation__item
-            a(href='publications-by-category.html') publications-by-category.html --- Список публикаций в категории
+            a(href='my-by-category.html') publications-by-category.html --- Список публикаций в категории
           li.navigation__item
             a(href='404.html') 404.html --- Страница для отображения ошибок
           li.navigation__item
@@ -59,7 +59,7 @@ mixin header(state)
           li.navigation__item
             a(href='post-visitor-no-tags.html') post-visitor-no-tags.html --- Страница поcта (для посетителя) без тегов
           li.navigation__item
-            a(href='post-visitor-no-comments.html') post-visitor-no-comments.html --- Страница поcта (для посетителя) без комментариев
+            a(href='post-visitor-no-publications.html') post-visitor-no-comments.html --- Страница поcта (для посетителя) без комментариев
           li.navigation__item
             a(href='post-visitor-no-photo.html') post-visitor-no-photo.html --- Страница поcта (для посетителя) без фотографии
           li.navigation__item
@@ -67,6 +67,6 @@ mixin header(state)
           li.navigation__item
             a(href='uikit.html') uikit.html --- UI KIT
     else
-      +header-nav(true)
+      +header-nav()
 
     a.header__search.button.button--search(href='#' aria-label='поиск по сайту')

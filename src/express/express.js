@@ -10,7 +10,7 @@ const categoriesRoutes = require(`./routes/categories-routes`);
 const myRoutes = require(`./routes/my-routes`);
 const mainRoutes = require(`./routes/main-routes`);
 
-const DEFAULT_PORT = 8081;
+const DEFAULT_PORT = 8080;
 
 const app = express();
 const path = require(`path`);
@@ -28,11 +28,9 @@ app.use(`/search`, searchRoutes);
 app.use(`/login`, loginRoutes);
 app.use(`/my`, myRoutes);
 app.use(`/`, mainRoutes);
-app.use((err, req, res) => {
-  res.status(500).render('errors/500');
-});
-app.use((err, req, res) => {
-  res.status(404).render('errors/404');
+app.use((req, res) => {
+  res.status(404);
+  res.render(`404`);
 });
 
 app.listen(DEFAULT_PORT);

@@ -1,0 +1,4 @@
+mixin search-result(result)
+  .search__result
+    time.search__date(datetime=data.date.datetime)=result.date.string
+    a.search__link=result.text

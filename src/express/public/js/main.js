@@ -53,7 +53,7 @@ if (popup) {
   }
 }
 
-// меняет высоту поля textarea в блоке comments в зависимости от количества введенных в него строк.
+// меняет высоту поля textarea в блоке publications в зависимости от количества введенных в него строк.
 
 let comments = document.querySelector('.post__comments');
 let publication = document.querySelector('.new-publication');

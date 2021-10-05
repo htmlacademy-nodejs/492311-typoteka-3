@@ -1,4 +1,4 @@
-mixin hot-list-item(data)
+mixin hot-list-item(item)
   li.hot__list-item
-    a.hot__list-link(href='#')=data.description
-      sup.hot__link-sup=data.number
+    a.hot__list-link(href='#')=item.description
+      sup.hot__link-sup=item.comments

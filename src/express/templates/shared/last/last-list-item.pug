@@ -1,5 +1,5 @@
-mixin last-list-item(data)
+mixin last-list-item(item)
   li.last__list-item
-    img.last__list-image(src=data.src width='20' height='20' alt='Аватар пользователя')
-    b.last__list-name=data.name
-    a.last__list-link(href='#')=data.comment
+    img.last__list-image(src=item.author.imgsrc width='20' height='20' alt='Аватар пользователя')
+    b.last__list-name=item.author.name
+    a.last__list-link(href='#')=item.comment
