@@ -10,9 +10,16 @@ const categoriesRoutes = require(`./routes/categories-routes`);
 const myRoutes = require(`./routes/my-routes`);
 const mainRoutes = require(`./routes/main-routes`);
 
-const DEFAULT_PORT = 8080;
+const DEFAULT_PORT = 8081;
 
 const app = express();
+const path = require(`path`);
+const PUBLIC_DIR = `public`;
+
+app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
+
+app.set(`view engine`, `pug`);
+app.set(`views`, `${__dirname}/templates`);
 
 app.use(`/articles`, articlesRoutes);
 app.use(`/categories`, categoriesRoutes);

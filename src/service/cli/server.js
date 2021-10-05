@@ -5,7 +5,7 @@ const fs = require(`fs`).promises;
 const {HttpCode, MessageColor} = require(`../../utils.js`);
 
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 3001;
 const FILENAME = `mocks.json`;
 
 const sendResponse = (res, statusCode, message) => {

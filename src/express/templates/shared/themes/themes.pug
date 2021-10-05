@@ -1,0 +1,6 @@
+include themes-item
+
+mixin themes(items)
+  ul.themes
+    each item in items
+      +themes-item(item)
