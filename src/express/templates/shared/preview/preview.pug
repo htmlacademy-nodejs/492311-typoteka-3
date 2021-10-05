@@ -1,0 +1,7 @@
+include preview-item
+
+mixin preview(data)
+  h2.visually-hidden Список превью статей
+  ul.preview__list
+    each item in data
+      +preview-item(item)

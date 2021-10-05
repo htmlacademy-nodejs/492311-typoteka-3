@@ -1,0 +1,5 @@
+mixin last-list-item(data)
+  li.last__list-item
+    img.last__list-image(src=data.src width='20' height='20' alt='Аватар пользователя')
+    b.last__list-name=data.name
+    a.last__list-link(href='#')=data.comment

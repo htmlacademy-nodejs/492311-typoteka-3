@@ -10,7 +10,7 @@ const categoriesRoutes = require(`./routes/categories-routes`);
 const myRoutes = require(`./routes/my-routes`);
 const mainRoutes = require(`./routes/main-routes`);
 
-const DEFAULT_PORT = 8080;
+const DEFAULT_PORT = 8081;
 
 const app = express();
 const path = require(`path`);
