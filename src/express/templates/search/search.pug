@@ -12,7 +12,7 @@ include ../shared/layout
             label
               input(type='text' placeholder='Что ищем?')
             button.search__button.button.button--transparent(type='submit') Найти
-          each result in [{date: {datetime: '2019-03-21T20:33', string: '21.03.2019, 20:33'}, text: 'Huawei открыла в России путешествия на смартфон Mate 30 Pro без сервисов Google'}, {date: {datetime: '2019-03-21T20:33', string: '21.03.2019, 20:33'}, text: '«Яндекс.Метрика» запустила путешествия сервис для оценки эффективности баннеров и видеорекламы в реальном времени'}]
+          each result in results
             +search-result(result)
           p.search-page__empty Ничего не нашлось
   include ../shared/footer

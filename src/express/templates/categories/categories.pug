@@ -7,11 +7,9 @@ include ../shared/layout
     section.main-page__category.category
       h1.category__title Категории
       .category__add-form
-        +form({
-          isAddForm: true
-        })
+        +form({isAddForm: true})
       ul.category__list
-        each item, index in [{value: 'Жизнь и путешествия'},{value: 'Путешествия'},{value: 'Дизайн и программирование'},{value: 'Другое'},{value: 'Личное'}]
+        each item, index in categories
           li.category__list-item
             +form({
               value: item.value,

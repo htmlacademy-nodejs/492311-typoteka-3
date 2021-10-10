@@ -16,22 +16,9 @@ include ../shared/layout
             time.post__date(datetime='2019-03-21T20:33') 21.03.2019, 20:33
             h2.post__title.title.title--main AirPods в один клик
             ul.post__themes.themes
-              +themes([
-                {
-                  description: 'Автомобили',
-                  number: '88'
-                },
-                {
-                  description: 'Удалённая работа',
-                  number: '14'
-                },
-                {
-                  description: 'Бизнес',
-                  number: '43',
-                  active: true
-                }])
+              +themes(themes)
           .post__picture
-            img(src='../img/sea-fullsize@1x.jpg' alt='пейзаж море, скалы, пляж')
+            img(src='img/sea-fullsize@1x.jpg' alt='пейзаж море, скалы, пляж')
           .post__text
             h3 Бирюзовое доверие
             p У Apple иногда попадаются интерфейсы, за которые создателей хочется сильно
@@ -40,7 +27,7 @@ include ../shared/layout
 
       .post__wrapper.post__wrapper--comments
           section.post__comments.comments
-            +comments([{author: {imgsrc: '../img/avatar-1.png', name: 'Евгений Петров'}, date: {datetime: '2019-03-21T20:33', string: '21.03.2019, 20:33'}, message: 'Автор, ты все выдумал, покайся'},{author: {imgsrc: '../img/avatar-3.png', name: 'Александр Марков'},date: {datetime: '2019-03-21T20:33', string: '21.03.2019, 20:33'}, message: 'Конечно, прежде чем так писать, нужно искренне приложить усилия, чтобы разобраться — не все люди умеют выражать свои мысли.'},{author: {imgsrc: '../img/avatar-5.png', name: 'Евгений Петров'},date: {datetime: '2019-03-21T20:33', string: '21.03.2019, 20:33'}, message: 'Автор, ты все выдумал, покайся'},{author: {imgsrc: '../img/avatar-4.png', name: 'Александр Марков'},date: {datetime: '2019-03-21T20:33', string: '21.03.2019, 20:33'}, message: 'Конечно, прежде чем так писать, нужно искренне приложить усилия, чтобы разобраться — не все люди умеют выражать свои мысли.'}])
+            +comments(comments)
             h2.comments__title.title.title--middle Комментарии отсутствуют
             .comments__footer.comments__footer--visitor
               button.comments__button.button.button--colored(type='submit') Войти
