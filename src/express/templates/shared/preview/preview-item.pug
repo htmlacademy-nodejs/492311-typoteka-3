@@ -1,0 +1,17 @@
+mixin preview-item(item)
+  li.preview__item(class=!item.img && 'preview__item--no-image')
+    ul.preview__breadcrumbs
+      each breadcrumb in item.breadcrumbs
+        li.preview__breadcrumbs-item
+          a.preview__breadcrumbs-link(href='#')=breadcrumb
+    if (item.img)
+      .preview__background
+        img.preview__background-image(src='img/' + item.img.name + '@1x.jpg' width='460' height='240' srcset='img/' + item.img.name + '@1x.jpg 1x, img/' + item.img.name + '@2x.jpg 2x' alt=item.img.alt)
+    time.preview__time(datetime=item.time.datetime)=item.time.string
+    h3.preview__name
+      a.preview__name-link(href='#')=item.name
+    p.preview__text=item.text
+    a.preview__comment(href='#') Комментарии
+      span.preview__cloud
+      b.preview__comment-count=item.comments
+

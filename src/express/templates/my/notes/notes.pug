@@ -1,0 +1,12 @@
+include ../../shared/header
+include note
+
+include ../../shared/layout
+  +header()
+  main.main-page.main-page--padding
+    section.main-page__notes.notes
+      h1.notes__title Мои записи
+      ul.notes__list
+        each note in notes
+          +note(note)
+  include ../../shared/footer

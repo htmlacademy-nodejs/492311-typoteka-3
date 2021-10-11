@@ -1,0 +1,3 @@
+mixin logo(error)
+  a.header__logo.logo(href='#' class=error ? `.header__logo--` + error: '')
+    img(src='img/icons/logo.svg' alt='логотип Тайпотеки')

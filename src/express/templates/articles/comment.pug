@@ -1,0 +1,8 @@
+mixin comment(comment)
+  .comments__avatar.avatar
+    img(src=comment.author.imgsrc alt='аватар пользователя')
+  .comments__text
+    .comments__head
+      p=comment.author.name
+      time.comments__date(datetime=comment.date.datetime)=comment.date.string
+    p.comments__message=comment.message

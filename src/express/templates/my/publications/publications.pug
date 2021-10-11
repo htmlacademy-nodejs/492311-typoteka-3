@@ -1,0 +1,12 @@
+include ../../shared/header
+include publication
+
+include ../../shared/layout
+  +header()
+  main.main-page.main-page--padding
+    section.main-page__publication.publication
+      h1.publication__title Комментарии
+      ul.publication__list
+        each publication in publications
+          +publication(publication)
+  include ../../shared/footer

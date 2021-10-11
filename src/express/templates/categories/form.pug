@@ -1,0 +1,16 @@
+mixin form(item)
+  form(action='#' method='POST')
+    input(
+      type='text'
+      name='category'
+      id=item.isAddForm ? 'add-form-add-category':'modify-form-category-' + item.index
+      placeholder=item.isAddForm && 'Новая категория'
+      value=!item.isAddForm && item.value
+      )
+    label(for=item.isAddForm ? 'add-form-add-category':'modify-form-category-' + item.index)
+      span.visually-hidden=item.isAddForm ? 'Добавить категорию':'Редактировать категорию'
+    if item.isAddForm
+      button.category__button.button.button--category(type='submit') &Dcy;&ocy;&bcy;&acy;&vcy;&icy;&tcy;&softcy;
+    else
+      button.category__button.button.button--category(type='submit') Сохранить
+      button.category__button.button.button--category(type='submit') Удалить

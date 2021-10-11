@@ -1,0 +1,18 @@
+include ../shared/header
+include search-result
+
+include ../shared/layout
+  +header()
+  main
+    section.search-page
+      .search-page__wrapper
+        h1 Поиск
+        .search.search-page__form
+          form(action='#' method='get')
+            label
+              input(type='text' placeholder='Что ищем?')
+            button.search__button.button.button--transparent(type='submit') Найти
+          each result in results
+            +search-result(result)
+          p.search-page__empty Ничего не нашлось
+  include ../shared/footer

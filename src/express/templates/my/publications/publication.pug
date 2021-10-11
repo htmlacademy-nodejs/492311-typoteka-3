@@ -1,0 +1,10 @@
+mixin publication(publication)
+  li.publication__list-item
+    .publication__header
+      img.publication__list-image(src=publication.author.imgsrc width='20' height='20' alt='Аватар пользователя')
+      b.publication__list-name=publication.author.name
+      time.publication__item-time(datetime=publication.date.datetime)=publication.date.string
+    a.publication__item-text(href='#')=publication.text
+    p.publication__text-strong=publication.source
+    button.publication__button.button.button--close-item(type='button')
+      span.visually-hidden Закрыть строку списка

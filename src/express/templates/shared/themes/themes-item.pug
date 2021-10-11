@@ -1,0 +1,5 @@
+mixin themes-item(item)
+  li.themes__item
+    a.themes__item-link(href='#' class=item.active && 'themes__item-link--active')=item.description
+      sup.themes__link-sup=item.number
+    button.themes__remove-btn(type='button') Удалить категорию
