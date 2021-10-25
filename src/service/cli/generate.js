@@ -57,29 +57,27 @@ const generateDate = (monthAgo) => {
   return date.toISOString().replace(`T`, ` `).slice(0, date.toISOString().indexOf(`.`));
 };
 
-const isMultiplyElementsInArray = (arr) => {
-  if (arr.length > 1) {
-    console.log(chalk[MessageColor.error](`Можно ввести только 1 аргумент`));
-    process.exit(ExitCode.error);
-  }
+const multipleArgumentsError = () => {
+  console.log(chalk[MessageColor.error](`Можно ввести только 1 аргумент`));
+  process.exit(ExitCode.error);
 };
 
-const isArgumentDigit = (args) => {
-  if (!args[0].match(/^-?[0-9]\d*(\.\d+)?$/)) {
+const isDigit = (count) => {
+  if (!count.toString().match(/^-?[0-9]\d*(\.\d+)?$/)) {
     console.log(chalk[MessageColor.error](`Аргумент должен быть числом`));
     process.exit(ExitCode.error);
   }
 };
 
-const isNegativeNumber = (args) => {
-  if (args[0] < 0) {
+const isNegativeNumber = (count) => {
+  if (count < 0) {
     console.log(chalk[MessageColor.error](`Аргумент должен быть больше нуля`));
     process.exit(ExitCode.error);
   }
 };
 
-const isAmountExceed = (amount) => {
-  if (amount > MAX_COUNT) {
+const isExceed = (count) => {
+  if (count > MAX_COUNT) {
     console.log(chalk[MessageColor.error](`Не больше ${MAX_COUNT} объявлений`));
     process.exit(ExitCode.error);
   }
@@ -88,14 +86,16 @@ const isAmountExceed = (amount) => {
 module.exports = {
   name: `--generate`,
   async run(args) {
-    if (args.length) {
-      isMultiplyElementsInArray(args);
-      isArgumentDigit(args);
-      isNegativeNumber(args);
-    }
     const [count] = args;
+    if (count) {
+      if (args.length > 1) {
+        multipleArgumentsError();
+      }
+      isDigit(count);
+      isNegativeNumber(count);
+      isExceed(count);
+    }
     const countPosts = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    isAmountExceed(count);
     const titles = await readContent(FILE_TITLES_PATH);
     const sentences = await readContent(FILE_SENTENCES_PATH);
     const categories = await readContent(FILE_CATEGORIES_PATH);
