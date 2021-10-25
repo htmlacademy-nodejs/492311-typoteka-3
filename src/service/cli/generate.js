@@ -27,7 +27,7 @@ const readContent = async (filePath) => {
 };
 
 const getMockCategories = (categories) => {
-  let newArr = [...categories];
+  const newArr = [...categories];
   const ITEMS_TO_REMOVE = getRandomInt(1, newArr.length);
   for (let i = 1; i < ITEMS_TO_REMOVE; i++) {
     newArr.splice(getRandomInt(0, newArr.length), 1);
