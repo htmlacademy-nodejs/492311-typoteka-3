@@ -7,19 +7,19 @@ categoriesRouter.get(`/`, (req, res) => {
   const pageContent = {
     categories: [
       {
-        value: 'Жизнь и путешествия'
+        value: `Жизнь и путешествия`
       },
       {
-        value: 'Путешествия'
+        value: `Путешествия`
       },
       {
-        value: 'Дизайн и программирование'
+        value: `Дизайн и программирование`
       },
       {
-        value: 'Другое'
+        value: `Другое`
       },
       {
-        value: 'Личное'
+        value: `Личное`
       }]
   };
   res.render(`categories/categories`, pageContent);

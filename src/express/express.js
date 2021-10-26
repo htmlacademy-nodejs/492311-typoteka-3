@@ -2,7 +2,7 @@
 
 const express = require(`express`);
 const path = require(`path`);
-const routing = require(`./routing/routing`);
+const routing = require(`./router/routing`);
 
 const DEFAULT_PORT = 8080;
 const PUBLIC_DIR = `public`;
@@ -13,6 +13,6 @@ app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
 app.set(`view engine`, `pug`);
 app.set(`views`, `${__dirname}/templates`);
 
-routing.registerRoutes(app);
+app.use(routing);
 
 app.listen(DEFAULT_PORT);
